@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alki cards</title>
+
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
+    
+</head>
+<body>
+
+    <style>
+
+        #controles {
+            padding: 40px;
+        }
+
+        #spread {
+            display: flex;
+            margin: 40px auto;
+        }
+        .carta {
+            display : block;
+            height  : 200px;
+            width   : 320px;
+            border  : outset;
+            /* background-attachment: fixed; */
+            transition: all ease-in-out 325ms 0s !important;
+            background-size     : 100% 100%;
+        }
+
+        .oculto   {
+            visibility: hidden;
+        }
+
+        /* // los estado s de la .carta */
+        .open {
+            background-color    : white;
+            /* background-position : center center*/
+            box-shadow          : 2px 7px 10px #000;
+        }
+        .close {
+            /* background : black !important; */
+            background-image: url('https://i.etsystatic.com/18226958/r/il/bddbb2/1802369874/il_570xN.1802369874_s48b.jpg') !important;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .carta {
+            background-color: #80808033;
+        }
+
+        .carta .imgCarta {
+                height: 49%;
+                width: 98%;
+                padding: 7px;
+                border : outset;
+
+        }
+
+        .carta h2 {
+            font-size: 1.16rem;
+            color: #000;
+            margin: 4px auto;
+            padding: 0;
+            text-align: center;
+            font-family: serif;
+
+        }
+
+        .carta p {
+            font-size: 0.67rem;
+            padding: 0;
+            margin : 0;
+            text-align: left;
+            font-weight: 400;
+            font-family: serif;
+            color: #000;
+        }
+    </style>
+
+    <section id="controles" class="container columns">
+        <div class="row">
+               <button id="tirada" class="button">Tirada</button>
+        </div>
+    </section>
+    <!-- fin de los controles -->
+ 
+         
+    <section id="spread" class="columns">  
+    </section>
+    <!-- fin del spread -->
+
+
+<script>
+
+   // hacemos una rray copn las cartas
+  let  cartas = [
+                             //  el iniciador
+                           {  
+                             titulo : 'The initiator', 
+                             data   : 'La persona que llevas a los buscadores hasta la fuente del misterio',
+                             imagen : 'https://cdn.pixabay.com/photo/2017/08/24/21/41/tartan-track-2678544_1280.jpg'
+                            },
+                            // el equilibrio
+                            {  
+                             titulo : 'Equilibrium', 
+                             data   : 'Aquel que busca la fortaleza de la fundacion mediante la busqueda por balance',
+                             imagen : 'https://cdn.pixabay.com/photo/2017/02/07/10/05/water-2045469_1280.jpg'
+                            },
+
+                            // La progression
+                            {  
+                             titulo : 'The inovator', 
+                             data   : 'The one how is always looking for what is not missing. And makes magic in the mean time.',
+                             imagen : 'https://cdn.pixabay.com/photo/2019/09/29/22/06/light-bulb-4514505_1280.jpg'
+                            },
+                            // El reunidor
+                            {  
+                             titulo : 'Reuniter', 
+                             data   : 'Those how seek to bring people together',
+                             imagen : 'https://cdn.pixabay.com/photo/2016/12/19/10/16/hand-1917895_1280.png'
+                            },
+
+                            // El wildcard
+                            {  
+                             titulo : 'The wildcard', 
+                             data   : 'Does what it wants. And blows people minds.',
+                             imagen : 'https://cdn.pixabay.com/photo/2018/03/26/20/49/tiger-3264048_1280.jpg'
+                            },
+                            // El gambler
+                            {  
+                             titulo : 'Gambler', 
+                             data   : 'The gambler steps up to the challengue.',
+                             imagen : 'https://cdn.pixabay.com/photo/2015/11/07/11/08/cards-1030852_1280.jpg'
+                            },
+                            // El builder
+                            {  
+                             titulo : 'The builder', 
+                             data   : 'This one is always building something.',
+                             imagen : 'https://cdn.pixabay.com/photo/2015/12/07/11/01/building-1080599_1280.jpg'
+                            },
+                ];
+      
+     const d          = document; // este es e ldocumento.
+     let spread       =  d.getElementById('spread')  // el spread
+     var bufferCartas = []  // el buffer de 
+
+    // la funcion para hacer el shuffle del array con las cartas.
+    function shuffle(a) {
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // funcion tirada
+        function hacerTirada() {
+            // hacemos el shufflle y loego el loop
+            shuffle(cartas).forEach( (element,index) => {
+                makeSpread( element , (card)=>{
+                        card.classList.add('close') // agregamso clase
+                        spread.appendChild(card)  // agregamos la carta
+                        // agregamos un hok al buffer cartas
+                        bufferCartas.push(card);
+                    })
+            })
+        }
+
+ //elm eveto del shuffle
+ tirada.onclick = function(e) {
+     spread.innerHTML = '';  // vaciamos
+    hacerTirada()  // hacmeo tirada
+ }
+
+// los eventois de los click en als carsat
+     document.addEventListener('click' , (e)=> {
+           // si es una carta
+           if( e.target.classList.contains('carta')) 
+           {
+                switch( e.target.classList.contains('close') )
+                {    // si la carata tienenla clase de cerrada
+                    case true : 
+                            e.target.classList.add('open') // agregamos nueva clase
+                            let contenido = e.target.querySelectorAll('.oculto') // toos con las clases
+                            contenido[0].classList.remove('oculto') // removemos la clase
+                            contenido[1].classList.remove('oculto') // removemos la clase
+                            contenido[2].classList.remove('oculto') // removemos la clase
+                            e.target.classList.remove('close')
+                    break;
+                    default:
+                            e.target.classList.remove('close')
+                }             
+           }
+     });
+     
+     // con esto hcameo el spread
+     function  makeSpread( hook , callback)
+     {
+           // them hooks
+                let card = d.createElement('div')
+                card.classList.add('carta')
+                card.classList.add('column')
+                // card.style.backgroundImage = "url('"+hook.imagen.toString()+"')"
+
+                let imagen = d.createElement('img')
+                imagen.classList.add('imgCarta')
+                imagen.classList.add('oculto')
+                imagen.src = hook.imagen
+                imagen.alt = 'img'
+
+                let title = d.createElement('h2')
+                title.classList.add('oculto')
+                title.textContent = hook.titulo
+
+                let data = d.createElement('p')
+                data.classList.add('oculto')
+                data.textContent = hook.data
+
+                card.appendChild(imagen);
+                card.appendChild(title)
+                card.appendChild(data)
+                
+
+                callback(card); // regresamos la card
+     }
+
+
+    </script>
+ 
+</body>
+</html>

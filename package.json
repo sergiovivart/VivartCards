@@ -1,0 +1,22 @@
+{
+  "name": "alki-cards",
+  "version": "1.0.0",
+  "description": "juego de cartas de oraculo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alkiwrites/Alki-Cards.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alkiwrites/Alki-Cards/issues"
+  },
+  "homepage": "https://github.com/alkiwrites/Alki-Cards#readme",
+  "dependencies": {
+    "bulma": "^0.8.1"
+  }
+}

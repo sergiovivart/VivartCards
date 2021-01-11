@@ -1,2 +1,2 @@
-# private_vivart_cards
-App de una pagina basado en javascript
+# Alki-Cards
+projecto de aplicacion web para hacer tiradas de cartas sencillas.
