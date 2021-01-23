@@ -1,2 +1,2 @@
 # Alki-Cards
-projecto de aplicacion web para hacer tiradas de cartas sencillas.
+Java script to make card-spreads from an object-array.
