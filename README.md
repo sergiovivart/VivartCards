@@ -1,2 +1,2 @@
 # Vivart-Cards
-Java script to make custom card-spreads.
+Java-script base aplication to make custom card-spreads.
