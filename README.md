@@ -1,2 +1,2 @@
-# Alki-Cards
-Java script to make card-spreads from an object-array.
+# Vivart-Cards
+Java script to make custom card-spreads.

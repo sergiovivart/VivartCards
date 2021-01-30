@@ -9,9 +9,7 @@
     
 </head>
 <body>
-
     <style>
-
         #controles {
             padding: 40px;
         }
@@ -85,17 +83,13 @@
                <button id="tirada" class="button">Tirada</button>
         </div>
     </section>
-    <!-- fin de los controles -->
- 
-         
+    
     <section id="spread" class="columns">  
     </section>
-    <!-- fin del spread -->
-
 
 <script>
 
-   // hacemos una rray copn las cartas
+   // content structure
   let  cartas = [
                              //  el iniciador
                            {  
@@ -143,11 +137,12 @@
                             },
                 ];
       
-     const d          = document; // este es e ldocumento.
-     let spread       =  d.getElementById('spread')  // el spread
-     var bufferCartas = []  // el buffer de 
+     // hooks and array
+     const d          = document; 
+     let spread       =  d.getElementById('spread')  
+     var bufferCartas = []  // buffer
 
-    // la funcion para hacer el shuffle del array con las cartas.
+    // shuffle arrays
     function shuffle(a) {
             for (let i = a.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -156,54 +151,53 @@
             return a;
         }
 
-        // funcion tirada
+        // maion function
         function hacerTirada() {
-            // hacemos el shufflle y loego el loop
+            // shuffle the pack
             shuffle(cartas).forEach( (element,index) => {
+                // make the spread
                 makeSpread( element , (card)=>{
-                        card.classList.add('close') // agregamso clase
-                        spread.appendChild(card)  // agregamos la carta
-                        // agregamos un hok al buffer cartas
-                        bufferCartas.push(card);
+                        card.classList.add('close') // add the class
+                        spread.appendChild(card)  // append the thing
+                        bufferCartas.push(card);  // push into tthe array
                     })
             })
         }
 
  //elm eveto del shuffle
  tirada.onclick = function(e) {
-     spread.innerHTML = '';  // vaciamos
-    hacerTirada()  // hacmeo tirada
+     spread.innerHTML = '';  // clean html
+    hacerTirada()  // make spread
  }
 
-// los eventois de los click en als carsat
+    //  the event of a click on the document
      document.addEventListener('click' , (e)=> {
-           // si es una carta
+           // if is a card
            if( e.target.classList.contains('carta')) 
            {
                 switch( e.target.classList.contains('close') )
-                {    // si la carata tienenla clase de cerrada
+                {    // if card has the class
                     case true : 
-                            e.target.classList.add('open') // agregamos nueva clase
-                            let contenido = e.target.querySelectorAll('.oculto') // toos con las clases
-                            contenido[0].classList.remove('oculto') // removemos la clase
-                            contenido[1].classList.remove('oculto') // removemos la clase
-                            contenido[2].classList.remove('oculto') // removemos la clase
-                            e.target.classList.remove('close')
+                            e.target.classList.add('open') // add new class
+                            let contenido = e.target.querySelectorAll('.oculto') // select all this calses
+                            contenido[0].classList.remove('oculto') // removemos the clases
+                            contenido[1].classList.remove('oculto') 
+                            contenido[2].classList.remove('oculto') 
+                            e.target.classList.remove('close') // add class
                     break;
                     default:
-                            e.target.classList.remove('close')
+                            e.target.classList.remove('close') // jus tremove class
                 }             
            }
      });
      
-     // con esto hcameo el spread
+     // Make teh spread
      function  makeSpread( hook , callback)
      {
            // them hooks
                 let card = d.createElement('div')
                 card.classList.add('carta')
                 card.classList.add('column')
-                // card.style.backgroundImage = "url('"+hook.imagen.toString()+"')"
 
                 let imagen = d.createElement('img')
                 imagen.classList.add('imgCarta')
